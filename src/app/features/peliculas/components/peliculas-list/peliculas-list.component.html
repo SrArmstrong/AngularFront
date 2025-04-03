@@ -1,0 +1,29 @@
+<div class="container">
+    <h2>Películas</h2>
+    <button (click)="cargarPeliculas()" [disabled]="(cargando$ | async)">
+      {{ (cargando$ | async) ? 'Cargando...' : 'Obtener Películas' }}
+    </button>
+  
+    @if (error$ | async; as error) {
+      <div class="error">{{ error }}</div>
+    }
+  
+    <table *ngIf="(peliculas$ | async)?.length">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Año</th>
+          <th>Duración</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (pelicula of peliculas$ | async; track pelicula.id) {
+          <tr>
+            <td>{{ pelicula.titulo }}</td>
+            <td>{{ pelicula.anio }}</td>
+            <td>{{ pelicula.duracion }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>

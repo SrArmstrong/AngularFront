@@ -1,0 +1,36 @@
+<div class="container">
+  <h2>Catálogo de Videojuegos</h2>
+  
+  @if (error$ | async; as error) {
+    <div class="alert alert-danger">{{ error }}</div>
+  }
+  @else if (cargando$ | async) {
+    <div class="alert alert-info">Cargando catálogo...</div>
+  }
+  @else {
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Año</th>
+            <th>Creador</th>
+            <th>Tipo</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (juego of videojuegos$ | async; track juego.id) {
+            <tr>
+              <td>{{ juego.id }}</td>
+              <td>{{ juego.nombre }}</td>
+              <td>{{ juego.anio }}</td>
+              <td>{{ juego.creador }}</td>
+              <td>{{ juego.tipo }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
