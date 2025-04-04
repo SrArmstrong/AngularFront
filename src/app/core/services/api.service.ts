@@ -20,9 +20,16 @@ export class ApiService {
     return this.http.get(`${this.apiUrl}/videojuegos/`);
   }
 
-  // Método para crear nueva película
-  createPelicula(peliculaData: any) {
-    return this.http.post(`${this.apiUrl}/peliculas/`, peliculaData);
+  // Ejemplo para series
+  getSeries() {
+    return this.http.get(`${this.apiUrl}/series/`);
+  }
+
+  //Videojuegos
+
+  // Método para crear nuevo videojuego
+  createVideojuego(videojuegoData: any) {
+    return this.http.post(`${this.apiUrl}/videojuegos/`, videojuegoData);
   }
 
   // Método para actualizar videojuego
@@ -34,4 +41,17 @@ export class ApiService {
   deleteItem(endpoint: string, id: number) {
     return this.http.delete(`${this.apiUrl}/${endpoint}/${id}/`);
   }
+
+  //Peliculas
+  
+  // Método para crear nuevo videojuego
+  createPelicula(peliculaData: any) {
+    return this.http.post(`${this.apiUrl}/peliculas/`, peliculaData);
+  }
+
+  // Método para actualizar videojuego
+  updatePelicula(id: number, peliculaData: any) {
+    return this.http.put(`${this.apiUrl}/videojuegos/${id}/`, peliculaData);
+  }
+
 }

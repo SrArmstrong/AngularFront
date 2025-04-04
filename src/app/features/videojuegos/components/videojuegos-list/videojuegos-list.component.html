@@ -1,36 +1,37 @@
 <div class="container">
-  <h2>Catálogo de Videojuegos</h2>
+  <h2>Lista de Videojuegos</h2>
   
-  @if (error$ | async; as error) {
-    <div class="alert alert-danger">{{ error }}</div>
-  }
-  @else if (cargando$ | async) {
-    <div class="alert alert-info">Cargando catálogo...</div>
-  }
-  @else {
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead class="table-dark">
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Año</th>
-            <th>Creador</th>
-            <th>Tipo</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (juego of videojuegos$ | async; track juego.id) {
-            <tr>
-              <td>{{ juego.id }}</td>
-              <td>{{ juego.nombre }}</td>
-              <td>{{ juego.anio }}</td>
-              <td>{{ juego.creador }}</td>
-              <td>{{ juego.tipo }}</td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
-  }
+  <div *ngIf="cargando$ | async" class="loading">Cargando...</div>
+  
+  <div *ngIf="error$ | async as error" class="error">
+    Error: {{ error }}
+  </div>
+  
+  <a routerLink="/main/videojuegos/crear" class="btn-add">Añadir Videojuego</a>
+  
+  <table *ngIf="videojuegos$ | async as videojuegos">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Año</th>
+        <th>Creador</th>
+        <th>Tipo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let videojuego of videojuegos">
+        <td>{{ videojuego.id }}</td>
+        <td>{{ videojuego.nombre }}</td>
+        <td>{{ videojuego.anio }}</td>
+        <td>{{ videojuego.creador }}</td>
+        <td>{{ videojuego.tipo }}</td>
+        <td class="actions">
+          <button (click)="editarVideojuego(videojuego.id)" class="btn-edit">Editar</button>
+          <button (click)="eliminarVideojuego(videojuego.id)" class="btn-delete">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

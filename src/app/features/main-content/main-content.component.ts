@@ -13,6 +13,8 @@ import { AuthService } from '../../core/services/auth.service';
         <ul>
           <li><a routerLink="/main/peliculas" routerLinkActive="active">Películas</a></li>
           <li><a routerLink="/main/videojuegos" routerLinkActive="active">Videojuegos</a></li>
+          <li><a routerLink="/main/comics" routerLinkActive="active">Comics</a></li>
+          <li><a routerLink="/main/series" routerLinkActive="active">Series</a></li>
           <li><button (click)="logout()">Cerrar Sesión</button></li>
         </ul>
       </nav>

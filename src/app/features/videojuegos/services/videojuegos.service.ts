@@ -26,6 +26,36 @@ export class VideojuegosService {
     );
   }
 
+  obtenerVideojuego(id: number): Observable<Videojuego> {
+    return this.http.get<Videojuego>(`${this.apiUrl}${id}/`, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  crearVideojuego(videojuego: Omit<Videojuego, 'id'>): Observable<Videojuego> {
+    return this.http.post<Videojuego>(this.apiUrl, videojuego, {
+      headers: this.getAuthHeaders()
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  actualizarVideojuego(id: number, videojuego: Videojuego): Observable<Videojuego> {
+    return this.http.put<Videojuego>(`${this.apiUrl}${id}/`, videojuego, {
+      headers: this.getAuthHeaders()
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  eliminarVideojuego(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}${id}/`, {
+      headers: this.getAuthHeaders()
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Error desconocido';
     if (error.error instanceof ErrorEvent) {

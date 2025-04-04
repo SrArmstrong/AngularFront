@@ -17,3 +17,9 @@ export const seleccionarError = createSelector(
   seleccionarEstadoVideojuegos,
   (estado) => estado.error
 );
+
+// Permite obtner información del store que ya este cargado
+export const seleccionarVideojuegosCargados = createSelector(
+    seleccionarEstadoVideojuegos,
+    (estado) => estado.cargados
+);
